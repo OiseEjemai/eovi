@@ -612,7 +612,7 @@ export async function unfollowUser(currentUserId: string, targetUserId: string) 
     );
 
     // Remove targetUserId from current user's following list
-    currentUser.following = currentUser.following.filter(id => id !== targetUserId);
+    currentUser.following = currentUser.following.filter((id: string) => id !== targetUserId);
     await databases.updateDocument(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
@@ -621,7 +621,7 @@ export async function unfollowUser(currentUserId: string, targetUserId: string) 
     );
 
     // Remove currentUserId from target user's followers list
-    targetUser.followers = targetUser.followers.filter(id => id !== currentUserId);
+    targetUser.followers = targetUser.followers.filter((id: string) => id !== currentUserId);
     await databases.updateDocument(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,

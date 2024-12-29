@@ -29,7 +29,7 @@ const PostDetails = () => {
   const { toast } = useToast()
 
   const { mutate: addComment, isLoading: isAddingComment } = useCreateComment();
-  const { data: comments, isLoading: isLoadingComments } = useFetchComments(id);
+  const { data: comments, isLoading: isLoadingComments } = useFetchComments(id ?? "");
 
   const { data: post, isLoading } = useGetPostById(id);
   const { data: userPosts, isLoading: isUserPostLoading } = useGetUserPosts(
@@ -56,9 +56,20 @@ const PostDetails = () => {
   };
 
   const handleAddComment = async () => {
-    console.log(id)
+    if (!postId) {
+      console.error("Post ID is undefined");
+      toast({
+        title: "Cannot add a comment without a valid Post ID but don't worry this is a dev error so just reload the page",
+      });
+      return;
+    }
     console.log(userId)
-    if (!content.trim()) return;
+    if (!content.trim()) {
+      toast({
+        title: "Comment content cannot be empty",
+      });
+      return;
+    }
 
     addComment(
       { postId, userId, content },

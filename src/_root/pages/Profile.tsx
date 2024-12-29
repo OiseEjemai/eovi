@@ -8,7 +8,7 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import { Button } from "@/components/ui";
+import { Button, useToast } from "@/components/ui";
 import { LikedPosts } from "@/_root/pages";
 import { QueryClient } from "@tanstack/react-query";
 import { useUserContext } from "@/context/AuthContext";
@@ -30,6 +30,7 @@ const StatBlock = ({ value, label }: StabBlockProps) => (
 const Profile = () => {
   const { id } = useParams();
   const { user } = useUserContext();
+  const { toast } = useToast()
   const { pathname } = useLocation();
   const queryClient = new QueryClient()
   const [followMessage, setFollowMessage] = useState("Follow");
@@ -48,16 +49,24 @@ const Profile = () => {
   }, [isFollowingState]);
 
   const handleFollow = async () => {
+    if (!id) {
+      console.error("Target User ID is undefined");
+      toast({
+        title: "Unable to follow user",
+        description: "Target User ID is missing",
+      });
+      return;
+    }
     try {
       console.log(followUser)
       if (isFollowingState) {
-        await unfollowUser({ userId: user.id, targetUserId: id });
+        await unfollowUser({ currentUserId: user.id, targetUserId: id });
         setIsFollowingState(false);
         // setFollowersCount((prev) => prev - 1); // Optimistic update
         setFollowersCount(currentUser?.following?.length); // Optimistic update
         window.location.reload()
       } else {
-        await followUser({ userId: user.id, targetUserId: id });
+        await followUser({ currentUserId: user.id, targetUserId: id });
         setIsFollowingState(true);
         // setFollowersCount((prev) => prev + 1); // Optimistic update
         setFollowersCount((currentUser?.following?.length)); // Optimistic update
