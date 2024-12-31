@@ -7,17 +7,17 @@ export const sidebarLinks = [
   {
     imgURL: "/assets/icons/wallpaper.svg",
     route: "/explore",
-    label: "Explore",
+    label: "Posts",
   },
   {
     imgURL: "/assets/icons/people.svg",
     route: "/all-users",
-    label: "People",
+    label: "All Users",
   },
   {
     imgURL: "/assets/icons/bookmark.svg",
     route: "/saved",
-    label: "Saved",
+    label: "Saved Posts",
   },
   {
     imgURL: "/assets/icons/gallery-add.svg",
@@ -35,7 +35,7 @@ export const bottombarLinks = [
   {
     imgURL: "/assets/icons/wallpaper.svg",
     route: "/explore",
-    label: "Explore",
+    label: "Posts",
   },
   {
     imgURL: "/assets/icons/bookmark.svg",

@@ -53,7 +53,7 @@ const Profile = () => {
       console.error("Target User ID is undefined");
       toast({
         title: "Unable to follow user",
-        description: "Target User ID is missing",
+        description: "Don't worry, it is from our side, so just reload the page again",
       });
       return;
     }
