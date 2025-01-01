@@ -1,6 +1,7 @@
 import { Models } from "appwrite";
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input"
+import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast"
 import { Button } from "@/components/ui/button"
 import { useCreateComment, useFetchComments } from "@/lib/react-query/queries";
@@ -21,6 +22,7 @@ const PostCard = ({ post }: PostCardProps) => {
   const { data: comments, isLoading: isLoadingComments } = useFetchComments(post.$id);
 
   const { user } = useUserContext();
+  const navigate = useNavigate();
   const { mutate: addComment, isLoading: isAddingComment } = useCreateComment();
 
   const postId = post.$id
@@ -49,6 +51,10 @@ const PostCard = ({ post }: PostCardProps) => {
       }
     );
   };
+
+  const navigateToComment = () => {
+    navigate(`/posts/${post.$id}`)
+  }
 
   if (!post.creator) return;
 
@@ -127,13 +133,14 @@ const PostCard = ({ post }: PostCardProps) => {
 
           ))}
         </div> */}
-        <div className="flex w-full max-w-sm items-center space-x-2">
+        <p className="cursor-pointer text-light-3" onClick={navigateToComment}>Add comment...</p>
+        {/* <div className="flex w-full max-w-sm items-center space-x-2">
 
           <Input type="text" value={content} onChange={(e) => setContent(e.target.value)} placeholder="Come on, Say it" className="appearance-none bg-transparent border-none w-96 text-gray-200 mr-3 py-1 px-2 leading-tight focus:outline-none" />
           <Button className="mt-5 shad-button_ghost" onClick={handleAddComment} disabled={isAddingComment}>
             {isAddingComment ? "Adding..." : "Add Comment"}
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
