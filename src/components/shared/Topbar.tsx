@@ -21,8 +21,8 @@ const Topbar = () => {
           <img
             src="https://i.imgur.com/DUtEoAr.png"
             alt="logo"
-            width={150}
-            height={345}
+            width={70}
+            height={70}
           />
         </Link>
 
