@@ -9,9 +9,23 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <script 
+    async 
+    src="https://tganalytics.xyz/index.js" 
+    onload="initAnalytics()" 
+    type="text/javascript"
+></script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main"></script>
+    <script>
+      function initAnalytics() {
+        window.telegramAnalytics.init({
+          token: 'eyJhcHBfbmFtZSI6ImVvdmkiLCJhcHBfdXJsIjoiaHR0cHM6Ly90Lm1lL2VvdmlfYm90IiwiYXBwX2RvbWFpbiI6Imh0dHBzOi8vZW92aS1zb2NpYWwudmVyY2VsLmFwcCJ9!q0303xZPwhGBvw4+k0wLaIoaU3Exio97H5JnIBifU+U=',
+          appName: 'eovi',
+        });
+      }
+  </script>
   </body>
 </html>
